@@ -1,0 +1,27 @@
+arr = [2, 5, 3, 6, 3, 2, 2]
+
+count = {}
+
+for value in arr:
+    if value in count:
+        count[value] += 1
+    else:
+        count[value] = 1
+
+print(count)
+
+max_element = None
+min_element = None
+max_count = float('-inf')
+min_count = float('inf')
+
+for key, value in count.items():
+    if value > max_count:
+        max_count = value
+        max_element = key
+    if value < min_count:
+        min_count = value
+        min_element = key
+
+print("Element with maximum count:", max_element)
+print("Element with minimum count:", min_element)
