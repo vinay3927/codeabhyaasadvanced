@@ -1,0 +1,57 @@
+#Linear Search
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i  # Return the index if the target is found
+    return -1  # Return -1 if the target is not found
+
+# Example array and target element
+array = [4, 2, 7, 1, 9, 5]
+target_element = 7
+
+index = linear_search(array, target_element)
+
+if index != -1:
+    print(f"Target {target_element} found at index {index}.")
+else:
+    print(f"Target {target_element} not found in the array.")
+
+#Binary Search
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    
+    while left <= right:
+        mid = left + (right - left) // 2
+        
+        if arr[mid] == target:
+            return mid  # Return the index if the target is found
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+            
+    return -1  # Return -1 if the target is not found
+
+# Example sorted array and target element
+sorted_array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+target_element = 5
+
+index = binary_search(sorted_array, target_element)
+
+if index != -1:
+    print(f"Target {target_element} found at index {index}.")
+else:
+    print(f"Target {target_element} not found in the array.")
+
+#Union of tow arrays
+array1 = [5, 2, 2, 3, 4, 5]
+array2 = [3, 4, 5, 6, 7]
+
+union =[]
+for i in array1:
+  if i not in union:
+    union.append(i)
+for j in array2:
+  if j not in union:
+    union.append(j)
+print(union)
