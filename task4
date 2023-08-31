@@ -1,0 +1,165 @@
+def find_majority_element(nums):
+    element_count = {}
+    n = len(nums)
+
+    for num in nums:
+        if num in element_count:
+            element_count[num] += 1
+        else:
+            element_count[num] = 1
+
+        if element_count[num] > n / 2:
+            return num
+
+    return None
+
+# Example usage
+nums = [2, 2, 3, 2, 4, 2, 2]
+result = find_majority_element(nums)
+if result:
+    print(f"The majority element is: {result}")
+else:
+    print("There is no majority element.")
+
+
+def two_sum(nums, target):
+    num_to_index = {}  # Maps numbers to their indices
+
+    for index, num in enumerate(nums):
+        complement = target - num
+        if complement in num_to_index:
+            return [num_to_index[complement], index]
+        num_to_index[num] = index
+
+    return None  # If no solution is found
+
+# Example usage
+nums = [2, 7, 11, 15]
+target = 9
+result = two_sum(nums, target)
+
+if result:
+    index1, index2 = result
+    print(f"The indices of the two elements are: {index1} and {index2}")
+    print(f"The elements are: {nums[index1]} and {nums[index2]}")
+else:
+    print("No solution found.")
+
+def three_sum_to_target(nums, target):
+    nums.sort()  # Sort the array in ascending order
+    
+    result = []
+    n = len(nums)
+    
+    for i in range(n - 2):
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue  # Skip duplicate elements
+        
+        left = i + 1
+        right = n - 1
+        
+        while left < right:
+            total = nums[i] + nums[left] + nums[right]
+            
+            if total == target:
+                result.append([nums[i], nums[left], nums[right]])
+                while left < right and nums[left] == nums[left + 1]:
+                    left += 1  # Skip duplicate elements
+                while left < right and nums[right] == nums[right - 1]:
+                    right -= 1  # Skip duplicate elements
+                left += 1
+                right -= 1
+            elif total < target:
+                left += 1
+            else:
+                right -= 1
+    
+    return result
+
+# Example usage
+nums = [1, 4, 2, 3, 5, -1, 0]
+target = 6
+result = three_sum_to_target(nums, target)
+print(result)
+
+def majority_element(nums):
+    candidate1, candidate2 = None, None
+    count1, count2 = 0, 0
+    
+    for num in nums:
+        if num == candidate1:
+            count1 += 1
+        elif num == candidate2:
+            count2 += 1
+        elif count1 == 0:
+            candidate1 = num
+            count1 = 1
+        elif count2 == 0:
+            candidate2 = num
+            count2 = 1
+        else:
+            count1 -= 1
+            count2 -= 1
+    
+    count1, count2 = 0, 0
+    for num in nums:
+        if num == candidate1:
+            count1 += 1
+        elif num == candidate2:
+            count2 += 1
+    
+    n = len(nums)
+    result = []
+    if count1 > n // 3:
+        result.append(candidate1)
+    if count2 > n // 3:
+        result.append(candidate2)
+    
+    return result
+
+# Example usage
+nums = [3, 2, 3]
+result = majority_element(nums)
+print(result)  # Output: [3]
+
+#4sum
+def four_sum(nums, target):
+    nums.sort()
+    result = []
+    n = len(nums)
+    
+    for i in range(n - 3):
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+        
+        for j in range(i + 1, n - 2):
+            if j > i + 1 and nums[j] == nums[j - 1]:
+                continue
+            
+            left = j + 1
+            right = n - 1
+            
+            while left < right:
+                total = nums[i] + nums[j] + nums[left] + nums[right]
+                
+                if total == target:
+                    result.append([nums[i], nums[j], nums[left], nums[right]])
+                    
+                    while left < right and nums[left] == nums[left + 1]:
+                        left += 1
+                    while left < right and nums[right] == nums[right - 1]:
+                        right -= 1
+                    left += 1
+                    right -= 1
+                elif total < target:
+                    left += 1
+                else:
+                    right -= 1
+    
+    return result
+
+# Example usage
+nums = [1, 0, -1, 0, -2, 2]
+target = 0
+result = four_sum(nums, target)
+print(result)
